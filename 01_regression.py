@@ -4,7 +4,7 @@ import numpy as np
 
 # Create 1000 phony x, y data points, y = 2x + 0.5 + noise
 n = 1000
-x_data = np.linspace(-2, 2, n)
+x_data = np.random.uniform(-5, 5, n)
 y_data = x_data * 2 + 0.5 + np.random.uniform(-0.5, 0.5, n)
 
 x_in = np.reshape(x_data, (-1, 1))
@@ -28,7 +28,7 @@ sess.run(tf.global_variables_initializer())
 d = {x:x_in, y:y_in}
 
 # Fit the line (Learns best fit is W: 2, b: 0.5)
-for step in range(100):
+for step in range(50):
   sess.run(train, feed_dict=d)
   if step % 10 == 0:
     print("%s - W: %s b: %s loss: %s"%(step, sess.run(W, feed_dict=d), sess.run(b, feed_dict=d), sess.run(loss, feed_dict=d)))
